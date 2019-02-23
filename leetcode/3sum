@@ -1,0 +1,79 @@
+problem:
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+Note: The solution set must not contain duplicate triplets.
+For example, given array S = [-1, 0, 1, 2, -1, -4,3,-2],
+
+A solution set is:
+[
+  [-1,  0, 1],
+  [-1, -1, 2],
+  [-1, -2, 3],
+  [-2,  0, 2]
+]
+
+Consideracoes em relacao ao problem:
+- Estudar mais a fundo sobre a permutacao e iteracoes sobre arrays das varias formas possiveis. Esse é um problem
+que exige uma boa logica de permutacao e subsequencias de arrays. 
+- Verificar tambem problemas parecidos e algoritmos ja conhecidos usados para resolver problemas como esse.
+- Estudar metodo de programacao dinamica para percorrer arrays de forma mais otimizada.
+- Olhar de forma atenta o enunciado de problema e verificar que nenhum detalhe importante foi deixado para tras.
+
+> constraints:
+1) S n of integers and a,b,c such that a + b +c = 0;
+2) The set of solution not contains duplicates triplets;
+3) What is the max size of array? 
+
+
+> ideas:
+ 1 - Generate all subsequences of triplets with the sum = 0; (ok but is not optimal);
+
+notes: 
+- if a have a zero to do a triplets its means that i need two numbers with the same value and one of them negative
+- The numbers of zero doesnt matter;
+- If I havent zero in the array ..well I need a integer positive and two integer negatives 
+
+> pseudo-codigo:
+
+
+
+code:
+
+//Code ok mas verificar alguns casos particulares como input [0,1], [0,0,0], []
+public List<List<Integer>> threeSum(int[] nums) {
+
+    List<List<Integer>> list = new LinkedList<>(); 
+
+    Arrays.sort(nums);
+
+    for (int i = 0; i< nums.length -2; i++) {
+        int a = nums[i], start = i + 1, end = nums.length -1;
+       while(start < end ){
+           int b = nums[start], c = nums[end];
+           if(a + b + c == 0){
+               list.add(Arrays.asList(a, b, c));
+
+
+           }
+           if( b == nums[start + 1]) {
+               start = start + 1;
+
+           } else {
+               end = end -1;
+           } else if (a + b +c > 0){
+               end = end -1;
+
+           } else {
+               start = start + 1;
+           }
+       }
+
+    }
+
+    return list;
+
+
+        
+}
+
+
+test:
